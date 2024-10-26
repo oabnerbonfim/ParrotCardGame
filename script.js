@@ -22,10 +22,10 @@ function createCardPairs(numCards) {
 
   let doubledCards = [];
 
-  for (let i = 0; i < selectedCards.length; i++) {
-    doubledCards.push(selectedCards[i]);
-    doubledCards.push(selectedCards[i]);
-  }
+  selectedCards.forEach(cards => {
+    doubledCards.push(cards);
+    doubledCards.push(cards);
+  });
 
   doubledCards.sort(() => Math.random() - 0.5);
 
@@ -48,23 +48,22 @@ function addCards(cards) {
   const gameBoard = document.querySelector(".game-board");
   gameBoard.innerHTML = '';
 
-  for (let i = 0; i < cards.length; i++) {
-    const cardImage = cards[i];
+  cards.forEach(parrotImage => {
     gameBoard.innerHTML += `
-      <div class="card" onclick="flipCard(this)" data-image="${cardImage}">
+      <div class="card" onclick="flipCard(this)" data-image="${parrotImage}">
         <div class="front-face face">
           <img src="./imagens/back.png" />
         </div>
         <div class="back-face face">
-          <img src="${cardImage}" />
+          <img src="${parrotImage}" />
         </div>
       </div>
-    `;
-  }
+    `
+  });
 }
 
 function flipCard(card) {
-  if (lockBoard) return;
+  if (lockBoard === true) return;
   if (card === firstCard) return;
 
   clickCount++;
