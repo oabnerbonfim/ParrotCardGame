@@ -8,30 +8,6 @@ const parrotImages = [
   'imagens/unicornparrot.gif',
 ];
 
-let firstCard = null;
-let secondCard = null;
-let lockBoard = false;
-let clickCount = 0;
-
-function createCardPairs(numCards) {
-  const selectedCards = [];
-
-  for (let i = 0; i < numCards / 2; i++) {
-    selectedCards.push(parrotImages[i]);
-  }
-
-  let doubledCards = [];
-
-  selectedCards.forEach(cards => {
-    doubledCards.push(cards);
-    doubledCards.push(cards);
-  });
-
-  doubledCards.sort(() => Math.random() - 0.5);
-
-  return doubledCards;
-} 
-
 function startGame() {
   const numCards = Number(prompt("Digite com quantas cartas você quer jogar:"));
 
@@ -44,9 +20,29 @@ function startGame() {
   }
 }
 
+function createCardPairs(numCards) {
+  const onePairCards = [];
+
+  for (let i = 0; i < numCards / 2; i++) {
+    onePairCards.push(parrotImages[i]);
+    console.log(onePairCards);
+
+  }
+
+  let doubledCards = [];
+
+  onePairCards.forEach(cards => {
+    doubledCards.push(cards);
+    doubledCards.push(cards);
+  });
+
+  doubledCards.sort(() => Math.random() - 0.5);
+
+  return doubledCards;
+} 
+
 function addCards(cards) {
   const gameBoard = document.querySelector(".game-board");
-  gameBoard.innerHTML = '';
 
   cards.forEach(parrotImage => {
     gameBoard.innerHTML += `
@@ -61,6 +57,11 @@ function addCards(cards) {
     `
   });
 }
+
+let firstCard = null;
+let secondCard = null;
+let lockBoard = false;
+let clickCount = 0;
 
 function flipCard(card) {
   if (lockBoard === true) return;
